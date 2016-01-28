@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<connections:connections xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:connections="http://www.ibm.com/websphere/wdo/connections">
+  <connection id="dataSourceArquiteDB2">
+    <development xsi:type="connections:rsc-live-connection" id="dataSourceArquiteDB2_dev" name="dataSourceArquiteDB2"/>
+    <runtime xsi:type="connections:datasource-connection" auto-deploy="false" class-location="C:\Program Files (x86)\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4.jar;C:\Program Files (x86)\IBM\SDPShared\plugins\com.ibm.datatools.db2_2.1.102.v20100715_2051\driver\db2jcc4_license_cisuz.jar" id="dataSourceArquiteDB2_runtime" classname="com.ibm.db2.jcc.DB2ConnectionPoolDataSource" database-name="ARQUITE" jndi-name="jndi/dataSourceArquiteDB2" port-number="50000" resource-reference-name="dataSourceArquiteDB2" server-name="10.28.21.143" sql-vendor-type="55" userid="usrarq"/>
+  </connection>
+</connections:connections>

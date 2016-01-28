@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+	<title>Login</title>
+	<style type="text/css">
+.ui-widget, .ui-widget .ui-widget {
+font-size: 92% !important;
+}
+
+.ui-layout-unit-content {
+	background-color: #FFB40D;
+}
+</style>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+		<p:layoutUnit position="center">
+			<h:form>
+				<p:growl id="growl" autoUpdate="true" showDetail="true" />
+				<p:dialog header="Login" widgetVar="dlg" resizable="false" visible="true">
+					<p:panel style="text-align: center">
+						<p:graphicImage value="resources/images/usuario.png" width="150" />
+						<h:panelGrid>
+							<p:inputText id="usuario" value="#{backLogin.username}" required="true" label="username"
+								style="width:200px;" />
+							<p:watermark for="usuario" value="Usuario" />
+
+							<p:password id="password" value="#{backLogin.password}" required="true" redisplay="true"
+								label="password" style="width:200px;" />
+							<p:watermark for="password" value="Password" />
+ 
+							<f:facet name="footer">
+								<p:commandButton style="width:180px;" update="growl" value="Iniciar Sesion"
+									actionListener="#{backLogin.login}" onclick="PrimeFaces.cleanWatermarks()"
+									oncomplete="handleLoginRequest(xhr, status, args)" />
+							</f:facet>
+						</h:panelGrid>
+					</p:panel>
+				</p:dialog>
+
+
+			</h:form>
+		</p:layoutUnit>
+	</p:layout>
+
+	<script type="text/javascript">
+    function handleLoginRequest(xhr, status, args) {
+        if(args.validationFailed || !args.loggedIn) {
+            PF('dlg').jq.effect("shake", {times:5}, 100);
+        }
+        else {
+            PF('dlg').hide();
+            $('#loginLink').fadeOut();
+        }
+    }
+</script>
+</h:body>
+</html>

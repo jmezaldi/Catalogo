@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Agregar Aplicación por Solución"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+				<p:growl autoUpdate="true" showDetail="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">FORMULARIO</f:facet>
+                    <p:outputLabel value="Comentario" for="comentario" />
+                    <p:inputText id="comentario" size="60" value="#{aplicacionXSolucionController.selected.comentario}" title="#{bundle.CreateAplicacionXSolucionTitle_comentario}" />
+                    <p:outputLabel value="Solución" for="idSolucion" />
+                    <p:selectOneMenu id="idSolucion" value="#{aplicacionXSolucionController.selected.idSolucion}"  title="#{bundle.CreateAplicacionXSolucionTitle_idSolucion}" required="true" requiredMessage="#{bundle.CreateAplicacionXSolucionRequiredMessage_idSolucion}">
+                        <f:selectItems value="#{solucionController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Aplicación" for="idAplicacion" />
+                    <p:selectOneMenu id="idAplicacion" value="#{aplicacionXSolucionController.selected.idAplicacion}" title="#{bundle.CreateAplicacionXSolucionTitle_idAplicacion}" required="true" requiredMessage="#{bundle.CreateAplicacionXSolucionRequiredMessage_idAplicacion}">
+                        <f:selectItems value="#{aplicacionController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>	                     
+
+					<f:facet name="footer">
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{aplicacionXSolucionController.create}" value="Guardar">
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{aplicacionXSolucionController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>	                    
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Resumen Servidor"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>
+                    <h:outputText value="ID Servidor"/>
+                    <h:outputText value="#{servidorController.selected.id}" title="#{bundle.ViewServidorTitle_id}"/>
+                    <h:outputText value="Nombre"/>
+                    <h:outputText value="#{servidorController.selected.nombre}" title="#{bundle.ViewServidorTitle_nombre}"/>
+                    <h:outputText value="Procesador"/>
+                    <h:outputText value="#{servidorController.selected.procesador}" title="#{bundle.ViewServidorTitle_procesador}"/>
+                    <h:outputText value="IP"/>
+                    <h:outputText value="#{servidorController.selected.ipAdress}" title="#{bundle.ViewServidorTitle_ipAdress}"/>
+                    <h:outputText value="Memoria"/>
+                    <h:outputText value="#{servidorController.selected.memoria}" title="#{bundle.ViewServidorTitle_memoria}"/>
+                    <h:outputText value="Virtual"/>
+                    <h:outputText value="#{servidorController.selected.virtual}" title="#{bundle.ViewServidorTitle_virtual}"/>
+                    <h:outputText value="Ubicación Física"/>
+                    <h:outputText value="#{servidorController.selected.ubicacionFisica}" title="#{bundle.ViewServidorTitle_ubicacionFisica}"/>
+                    <h:outputText value="Comentario Interno"/>
+                    <h:outputText value="#{servidorController.selected.comentarioInterno}" title="#{bundle.ViewServidorTitle_comentarioInterno}"/>
+                    <h:outputText value="ID Servidor Físico"/>
+                    <h:outputText value="#{servidorController.selected.servidorFisicoId.nombre}" title="#{bundle.ViewServidorTitle_servidorFisicoId}"/>
+                    <h:outputText value="Ambiente"/>
+                    <h:outputText value="#{servidorController.selected.idAmbiente.nombre}" title="#{bundle.ViewServidorTitle_idAmbiente}"/>
+                    <f:facet name="footer">			
+		                <h:commandLink action="#{servidorController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>                    
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

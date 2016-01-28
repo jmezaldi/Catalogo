@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Agregar Entidad"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+            	<p:growl autoUpdate="true" showDetail="true" />
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>                    
+                    <h:outputLabel value="Nombre" for="nombre" />
+                    <h:inputText id="nombre" size="60" value="#{entidadController.selected.nombre}" title="#{bundle.CreateEntidadTitle_nombre}" required="true" requiredMessage="#{bundle.CreateEntidadRequiredMessage_nombre}"/>
+                    <h:outputLabel value="Descripción" for="descripcion" />
+					<p:inputTextarea  id="descripcion" rows="3" cols="70" value="#{entidadController.selected.descripcion}"  />                    
+                    <h:outputLabel value="Data Sensible" for="dataSensible" />
+			        <p:selectOneMenu id="dataSensible" value="#{entidadController.selected.dataSensible}" style="width:125px">
+			        	<f:selectItem itemLabel="---" itemValue="-" />
+			            <f:selectItem itemLabel="Si" itemValue="V" />
+			            <f:selectItem itemLabel="No" itemValue="F" />
+			        </p:selectOneMenu>                    
+                    <h:outputLabel value="Base de Datos" for="idBaseDatos" />
+                    <p:selectOneMenu id="idBaseDatos" value="#{entidadController.selected.idBaseDatos}" 
+                    title="#{bundle.CreateEntidadTitle_idBaseDatos}" required="true" 
+                    requiredMessage="#{bundle.CreateEntidadRequiredMessage_idBaseDatos}">
+                        <f:selectItems value="#{baseDatosController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>
+					<f:facet name="footer">
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{entidadController.create}" value="Guardar">
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{entidadController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>                      
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

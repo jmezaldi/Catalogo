@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/masterLayout.xhtml">
+		<ui:define name="metadata">
+			<f:view>
+				<f:metadata>
+					<f:event listener="#{backLogin.verificarAccesoMonitor}"
+						type="preRenderView"></f:event>
+				</f:metadata>
+			</f:view>
+		</ui:define>
+
+	<ui:define name="title">
+            <h:outputText value="Lista de Aplicaciones"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+                   <p:accordionPanel activeIndex="-" >
+				    		<p:tab title="Definición">
+				    		 	#{backLogin.obtenerDescripcionLarga("APLICACION")}
+				    	    </p:tab>
+				   </p:accordionPanel>	        
+            <h:form id="formAplicacion" >
+            	<p:growl id="growl" autoUpdate="true" showDetail="true" />
+            
+               <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                    <p:panel>
+                    <p:dataTable id="mydata_aplicaciones" value="#{aplicacionController.items}" var="item" rows="10" paginator="true" rowIndexVar="rowIndex"
+						paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                         rowsPerPageTemplate="10,25,50" widgetVar="ApliTable" filteredValue="#{aplicacionController.filteredAplicacion}">
+
+				      <f:facet name="header">
+				            <p:outputPanel>
+				                <h:outputText value="Buscar Palabra : " />
+				                <p:inputText id="globalFilter" onkeyup="PF('ApliTable').filter()" style="width:150px" placeholder="Enter keyword"/>
+				            </p:outputPanel>
+				        </f:facet>  
+				                               
+                    	<p:column headerText="#" style="width:3%;">
+                    		<h:outputText value="#{rowIndex+1}" /> 
+                    	</p:column>
+				        <p:column headerText="Código" filterBy="#{item.codigo}" style="width:5%;">
+				        	<h:outputText value="#{item.codigo}" />
+				        </p:column>                    	
+						<p:column headerText="Área Dueño" filterBy="#{item.areaDuenoApp}" style="width:7%;">
+							<h:outputText value="#{item.areaDuenoApp}" />  
+						</p:column>
+						<p:column headerText="Estado" filterBy="#{item.idEstado.nombre}" style="width:7%;">
+							<h:outputText value="#{item.idEstado.nombre}" />
+						</p:column>
+						<p:column headerText="Nombre" filterBy="#{item.nombre}" style="width:19%;">
+							<h:outputText value="#{item.nombre}" />
+						</p:column>
+						<p:column headerText="Descripción" filterBy="#{item.descripcion}" style="width:19%;">
+							<h:outputText value="#{item.descripcion}" />
+						</p:column>
+						<p:column headerText="Repositorio" style="width:7%;">
+							<h:outputText value="#{item.carpetaRepositorio}" />
+						</p:column>
+ 						<p:column headerText="Release" style="width:10%;">
+ 							<h:outputText value="#{item.release}" />
+ 						</p:column>
+ 						<p:column headerText="Comentario" style="width:15%;">
+ 							<h:outputText value="#{item.comentarioInterno}" />
+ 						</p:column>
+
+                        <p:column rendered="#{backLogin.usuario.perfil == 'Arquitectura'}" headerText="Editar" style="width:4%;" >
+                            <h:commandLink action="#{aplicacionController.prepareEditCust(item)}">
+                            		<h:graphicImage value="/resources/images/editar.png" alt="Editar" width="20" height="20" />
+                            </h:commandLink>
+                        </p:column>
+						<p:column rendered="#{backLogin.usuario.perfil == 'Arquitectura'}"  headerText="Eliminar" style="width:4%;">                       
+	                        <h:commandLink action="#{aplicacionController.destroyCust(item)}" onclick="if(!confirm('¿Esta seguro que desea eliminar?')) return false;" >
+	                        	<h:graphicImage value="/resources/images/eliminar.gif" alt="Eliminar" width="20" height="20" />
+	                        	<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+	                        </h:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+					<f:facet name="footer">
+						<h:commandLink action="#{aplicacionController.prepareCreate}" disabled="#{backLogin.usuario.perfil != 'Arquitectura'}"
+							style="font-style: italic; font-size:14px; font-weight: bold; color: red;">
+							<h:outputText value="Registrar"/>
+						</h:commandLink>
+					</f:facet>
+			 		<p:panel header="Export All Data">
+			            <h:commandLink id="excel">
+			                <p:graphicImage value="/resources/images/ico_excell.jpg" alt="Download Excell"  width="60" height="60" />
+			                <p:dataExporter type="xls" postProcessor="#{aplicacionController.postProcessXLS}"
+			                    target="mydata_aplicaciones" fileName="Aplicaciones_#{aplicacionController.nombre_con_fechaActual}" />
+			            </h:commandLink>
+			            <h:commandLink id="pdf">
+			                <p:graphicImage value="/resources/images/ico_pdf.jpg" alt="Download PDF"  width="60" height="60"/>
+			                <p:dataExporter type="pdf" preProcessor="#{aplicacionController.preProcessPDF}" 
+			                	target="mydata_aplicaciones" fileName="Aplicaciones_#{aplicacionController.nombre_con_fechaActual}" />
+			            </h:commandLink>
+			        </p:panel>					
+                </p:panel>
+            </h:form>
+         
+        </ui:define>
+    </ui:composition>
+
+</html>

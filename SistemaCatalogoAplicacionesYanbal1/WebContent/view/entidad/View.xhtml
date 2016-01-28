@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Resumen Entidad"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>
+                    <h:outputText value="ID Entidad"/>
+                    <h:outputText value="#{entidadController.selected.id}" title="#{bundle.ViewEntidadTitle_id}"/>
+                    <h:outputText value="Nombre"/>
+                    <h:outputText value="#{entidadController.selected.nombre}" title="#{bundle.ViewEntidadTitle_nombre}"/>
+                    <h:outputText value="Descripción"/>
+                    <h:outputText value="#{entidadController.selected.descripcion}" title="#{bundle.ViewEntidadTitle_descripcion}"/>
+                    <h:outputText value="Data Sensible"/>
+                    <h:outputText value="#{entidadController.selected.dataSensible}" title="#{bundle.ViewEntidadTitle_dataSensible}"/>
+                    <h:outputText value="Base de Datos"/>
+                    <h:outputText value="#{entidadController.selected.idBaseDatos.nombre}" title="#{bundle.ViewEntidadTitle_idBaseDatos}"/>
+                    <f:facet name="footer">			
+		                <h:commandLink action="#{entidadController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>                      
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

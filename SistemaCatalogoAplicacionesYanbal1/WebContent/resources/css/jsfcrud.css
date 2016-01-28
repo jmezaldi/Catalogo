@@ -1,0 +1,20 @@
+.ui-widget, .ui-widget .ui-widget {
+	font-size: 92% !important;
+}
+
+#northPanel {
+	z-index: 2 !important;
+}
+
+#northPanel div {
+	overflow: visible;
+}
+
+.ui-layout-north {
+	z-index: 40 !important;
+	overflow: overflow !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: overflow !important;
+}

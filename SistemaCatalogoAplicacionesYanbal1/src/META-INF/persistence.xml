@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	<persistence-unit name="SistemaCatalogoAplicacionesYanbalPU" transaction-type="JTA" >
+		<jta-data-source>jdbc/dataSourceArquiteDB2</jta-data-source>	
+		<class>com.yanbal.catalogo.bean.Ambiente</class>
+		<class>com.yanbal.catalogo.bean.Aplicacion</class>
+		<class>com.yanbal.catalogo.bean.AplicacionInterfaceConsume</class>
+		<class>com.yanbal.catalogo.bean.AplicacionInterfaceExpone</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXBaseDatos</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXBaseDatosPK</class>	
+		<class>com.yanbal.catalogo.bean.AplicacionXSolucion</class>	
+		<class>com.yanbal.catalogo.bean.AplicacionXSubProcesoNegocio</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXSubProcesoNegocioPK</class>	
+		<class>com.yanbal.catalogo.bean.ArchivoDesplegable</class>			
+		<class>com.yanbal.catalogo.bean.AtributoXEntidad</class>
+		<class>com.yanbal.catalogo.bean.BaseDatos</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXCaracteristica</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXCaracteristicaPK</class>		
+		<class>com.yanbal.catalogo.bean.BaseDatosServidor</class>
+		<class>com.yanbal.catalogo.bean.BaseDatosServidorPK</class>		
+		<class>com.yanbal.catalogo.bean.CaractetisticaAplicacion</class>
+		<class>com.yanbal.catalogo.bean.Certificacion</class>
+		<class>com.yanbal.catalogo.bean.Entidad</class>
+		<class>com.yanbal.catalogo.bean.EstadoAplicacion</class>
+		<class>com.yanbal.catalogo.bean.Excepcion</class>
+		<class>com.yanbal.catalogo.bean.Framework</class>
+		<class>com.yanbal.catalogo.bean.Funcion</class>
+		<class>com.yanbal.catalogo.bean.InterfaceBatch</class>
+		<class>com.yanbal.catalogo.bean.InterfaceBatchPK</class>
+		<class>com.yanbal.catalogo.bean.Pais</class>
+		<class>com.yanbal.catalogo.bean.PlataformaCliente</class>
+		<class>com.yanbal.catalogo.bean.Proceso</class>
+		<class>com.yanbal.catalogo.bean.Servicio</class>
+		<class>com.yanbal.catalogo.bean.ServicioXServicio</class>
+		<class>com.yanbal.catalogo.bean.ServicioXServicioPK</class>		
+		<class>com.yanbal.catalogo.bean.Servidor</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBase</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstancia</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXServicio</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXServicioPK</class>		
+		<class>com.yanbal.catalogo.bean.Solucion</class>
+		<class>com.yanbal.catalogo.bean.StoreProcedure</class>
+		<class>com.yanbal.catalogo.bean.SubProcesoNegocio</class>
+		<class>com.yanbal.catalogo.bean.Usuario</class>		
+		<class>com.yanbal.catalogo.bean.AplicacionXArchivoDesplegable</class>
+		<class>com.yanbal.catalogo.bean.AplicacionXArchivoDesplegablePK</class>
+		<class>com.yanbal.catalogo.bean.FrameworkXAplicacion</class>
+		<class>com.yanbal.catalogo.bean.FrameworkXAplicacionPK</class>
+		<class>com.yanbal.catalogo.bean.PaisXAplicacion</class>
+		<class>com.yanbal.catalogo.bean.PaisXAplicacionPK</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXAplicacion</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXAplicacionPK</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXServidor</class>
+		<class>com.yanbal.catalogo.bean.SoftwareBaseInstanciaXServidorPK</class>
+		<class>com.yanbal.catalogo.bean.Diccionario</class>			
+		<exclude-unlisted-classes>true</exclude-unlisted-classes>		
+	    <properties>    
+	    	<property name="openjpa.jdbc.Schema" value="CATALOGO"/>
+	    	<property name="schema" value="CATALOGO"/>
+	    </properties>	
+	</persistence-unit>
+</persistence>

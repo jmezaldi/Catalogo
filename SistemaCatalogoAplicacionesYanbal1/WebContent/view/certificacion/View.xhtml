@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+    
+        <ui:define name="title">
+            <h:outputText value="Resumen"></h:outputText>
+        </ui:define>
+        
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>
+                    <h:outputText value="ID"/>
+                    <h:outputText value="#{certificacionController.selected.id}" title="#{bundle.ViewCertificacionTitle_id}"/>
+                    <h:outputText value="Fecha"/>
+                    <h:outputText value="#{certificacionController.selected.fecha}" title="#{bundle.ViewCertificacionTitle_fecha}">
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:outputText>
+                    <h:outputText value="Plataforma Cliente"/>
+                    <h:outputText value="#{certificacionController.selected.idPlataformaCliente.nombre}" title="#{bundle.ViewCertificacionTitle_idPlataformaCliente}"/>
+                    <h:outputText value="Aplicación"/>
+                    <h:outputText value="#{certificacionController.selected.idAplicacion.nombre}" title="#{bundle.ViewCertificacionTitle_idAplicacion}"/>
+                    <f:facet name="footer">			
+		                <h:commandLink action="#{certificacionController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

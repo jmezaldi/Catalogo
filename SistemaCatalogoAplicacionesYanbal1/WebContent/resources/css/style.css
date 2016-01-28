@@ -1,0 +1,9 @@
+.ui-icon.red {
+	background-image:
+		url(http://code.jquery.com/ui/1.9.1/themes/base//images/ui-icons_cd0a0a_256x240.png);
+}
+
+.ui-icon.blue {
+	background-image:
+		url(http://rhizosphere.googlecode.com/hg-history/e546f1a44825e2e1568de9d5bb87d3f2b1f41acd/src/stylesheets/blue/images/ui-icons_6391de_256x240.png);
+}

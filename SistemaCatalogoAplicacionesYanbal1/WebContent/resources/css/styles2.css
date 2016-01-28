@@ -1,0 +1,31 @@
+.ui-widget,.ui-widget .ui-widget {
+	font-size: 92% !important;
+}
+
+.ui-autocomplete input {
+	width: 200px;
+}
+
+.foo td {
+	vertical-align: top;
+}
+
+#northPanel {
+	z-index: 2 !important;
+}
+
+#northPanel div {
+	overflow: visible;
+}
+
+.ui-layout-north {
+	z-index: 40 !important;
+	overflow: overflow !important;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: overflow !important;
+}
+
+a.linkMenu:link {color:#000000;}
+a.linkMenu:hover {text-decoration:underline; font-weight:bold;color: red;}

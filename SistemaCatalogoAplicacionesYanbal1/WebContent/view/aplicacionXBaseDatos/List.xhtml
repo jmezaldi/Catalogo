@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core" 
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui">
+
+        <ui:composition template="/masterLayout.xhtml">
+		<ui:define name="metadata">
+			<f:view>
+				<f:metadata>
+					<f:event listener="#{backLogin.verificarAccesoMonitor}"
+						type="preRenderView"></f:event>
+				</f:metadata>
+			</f:view>
+		</ui:define>
+        <ui:define name="title">
+            <h:outputText value="Lista de Aplicaciones por Base de Datos"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+                   <p:accordionPanel activeIndex="-" >
+				    		<p:tab title="Definición">
+				    		 	#{backLogin.obtenerDescripcionLarga("APLICACION_X_BASE_DATOS")}
+				    	    </p:tab>
+				   </p:accordionPanel>        
+            <h:form id="formAplicacionXBaseDatos" >
+            	<p:growl id="growl" autoUpdate="true" showDetail="true" />
+            
+               <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                    <p:panel>
+                    <p:dataTable id="mydata_aplicacionXBaseDatos"  value="#{aplicacionXBaseDatosController.items}" var="item" rows="10" paginator="true" rowIndexVar="rowIndex"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="10,25,50" filteredValue="#{aplicacionXBaseDatosController.filteredItems}">
+ 
+                    	<p:column headerText="#" style="width:5%;">
+                    		<h:outputText value="#{rowIndex+1}" />
+                    	</p:column>
+                    	<p:column headerText="Base de Datos" filterBy="#{item.basedatos.nombre}" style="width:40%;">
+                    		<h:outputText value="#{item.basedatos.nombre}" />
+                    	</p:column>
+                    	<p:column headerText="Aplicación" filterBy="#{item.aplicacion.nombre}" style="width:45%;">
+                    		<h:outputText value="#{item.aplicacion.nombre}" />
+                    	</p:column>
+
+<!--                         <p:column headerText="Editar" style="width:5%;" rendered="#{backLogin.usuario.perfil == 'Arquitectura'}">
+                            <h:commandLink action="#{aplicacionXBaseDatosController.prepareEdit}" >
+                            		<h:graphicImage value="/resources/images/editar.png" alt="Editar" width="20" height="20" />
+                            </h:commandLink>
+                        </p:column> -->
+						<p:column headerText="Eliminar" style="width:5%;" rendered="#{backLogin.usuario.perfil == 'Arquitectura'}">                       
+	                        <h:commandLink action="#{aplicacionXBaseDatosController.destroyCust(item)}" onclick="if(!confirm('¿Esta seguro que desea eliminar?')) return false;">
+                           		<h:graphicImage value="/resources/images/eliminar.gif" alt="Eliminar" width="20" height="20" />
+                           		<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+	                        </h:commandLink>
+                        </p:column>
+                    </p:dataTable>
+
+					<f:facet name="footer">
+						<h:commandLink action="#{aplicacionXBaseDatosController.prepareCreate}" disabled="#{backLogin.usuario.perfil != 'Arquitectura'}" 
+							style="font-style: italic; font-size:14px; font-weight: bold; color: red;">
+							<h:outputText value="Registrar"/>
+						</h:commandLink>
+					</f:facet>
+			 		<p:panel header="Export All Data">
+			            <h:commandLink id="excel">
+			                <p:graphicImage value="/resources/images/ico_excell.jpg" alt="Download Excell"  width="60" height="60" />
+			                <p:dataExporter type="xls" postProcessor="#{aplicacionXBaseDatosController.postProcessXLS}"
+			                    target="mydata_aplicacionXBaseDatos" fileName="AplicacionXBaseDatos_#{aplicacionXBaseDatosController.nombre_con_fechaActual}" />
+			            </h:commandLink>
+			            <h:commandLink id="pdf">
+			                <p:graphicImage value="/resources/images/ico_pdf.jpg" alt="Download PDF"  width="60" height="60"/>
+			                <p:dataExporter type="pdf" preProcessor="#{aplicacionXBaseDatosController.preProcessPDF}" 
+			                	target="mydata_aplicacionXBaseDatos" fileName="AplicacionXBaseDatos_#{aplicacionXBaseDatosController.nombre_con_fechaActual}" />
+			            </h:commandLink>
+			        </p:panel>					
+                </p:panel>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

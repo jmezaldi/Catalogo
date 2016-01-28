@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Editar Servicio"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>
+                    <p:outputLabel value="ID Servicio" for="id" />
+                    <p:inputText id="id" value="#{servicioController.selected.id}" title="#{bundle.EditServicioTitle_id}" required="true" requiredMessage="#{bundle.EditServicioRequiredMessage_id}"/>
+                    <p:outputLabel value="Nombre" for="nombre" />
+                    <p:inputText id="nombre" size="60" value="#{servicioController.selected.nombre}" title="#{bundle.EditServicioTitle_nombre}" />
+                    <p:outputLabel value="Descripción" for="descripcion" />
+                    <p:inputTextarea id="descripcion" rows="3" cols="70" value="#{servicioController.selected.descripcion}"/>
+                    <p:outputLabel value="URL Servicio" for="urlServicio" />
+                    <p:inputText id="urlServicio" size="60" value="#{servicioController.selected.urlServicio}" title="#{bundle.EditServicioTitle_urlServicio}" />
+                    <p:outputLabel value="Código" for="codigo" />
+                    <p:inputText id="codigo" value="#{servicioController.selected.codigo}" title="#{bundle.EditServicioTitle_codigo}" />
+                    <p:outputLabel value="Documentación" for="documentacion" />
+                    <p:inputText id="documentacion" size="60" value="#{servicioController.selected.documentacion}" title="#{bundle.EditServicioTitle_documentacion}" />
+                    <p:outputLabel value="Comentario Interno" for="comentarioInterno" />
+					<p:inputTextarea  id="comentarioInterno" rows="3" cols="70" value="#{servicioController.selected.comentarioInterno}"/>                    
+                    <p:outputLabel value="Composición" for="composicion" />
+                    <p:inputText id="composicion" size="60" value="#{servicioController.selected.composicion}" title="#{bundle.EditServicioTitle_composicion}" />
+                    <p:outputLabel value="Código Interno Factory" for="codigoInternoFactory" />
+                    <p:inputText id="codigoInternoFactory" size="60" value="#{servicioController.selected.codigoInternoFactory}" title="#{bundle.EditServicioTitle_codigoInternoFactory}" />
+                    <p:outputLabel value="Solución" for="solucion" />
+                    <p:inputText id="solucion" value="#{servicioController.selected.solucion}" title="#{bundle.EditServicioTitle_solucion}" />
+                    <p:outputLabel value="Archivo" for="archivo" />
+                    <p:inputText id="archivo" size="60" value="#{servicioController.selected.archivo}" title="#{bundle.EditServicioTitle_archivo}" />
+                    <p:outputLabel value="# Catálogo Factory" for="numeroCatalogoFactory" />
+                    <p:inputText id="numeroCatalogoFactory" size="60" value="#{servicioController.selected.numeroCatalogoFactory}" title="#{bundle.EditServicioTitle_numeroCatalogoFactory}" />
+                    <p:outputLabel value="Código Interfaz" for="codigoInterfaz" />
+                    <p:inputText id="codigoInterfaz" size="60" value="#{servicioController.selected.codigoInterfaz}" title="#{bundle.EditServicioTitle_codigoInterfaz}" />
+                    <p:outputLabel value="Interface ID Base" for="idInterfaceidBase" />
+                    <p:selectOneMenu id="idInterfaceidBase" value="#{servicioController.selected.idInterfaceidBase}">
+                        <f:selectItems value="#{aplicacionInterfaceExponeController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>                      
+                    <f:facet name="footer">                    	
+                    	<h:outputText value="&#160;" /><h:outputText value="&#160;" />	
+						<h:commandLink action="#{servicioController.update}" value="Guardar">
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />						
+		                <h:commandLink action="#{servicioController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>                      
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

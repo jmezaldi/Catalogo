@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+    
+        <ui:define name="title">
+            <h:outputText value="Agregar Servidor"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                 	<p:growl autoUpdate="true" showDetail="true" />
+            	
+                <p:panelGrid columns="2">
+                	<f:facet name="header">FORMULARIO</f:facet>
+                    <p:outputLabel value="Nombre" for="nombre" />
+                    <p:inputText id="nombre" size="60" value="#{servidorController.selected.nombre}" title="#{bundle.CreateServidorTitle_nombre}" />
+                    <p:outputLabel value="Procesador" for="procesador" />
+                    <p:inputText id="procesador" size="60" value="#{servidorController.selected.procesador}" title="#{bundle.CreateServidorTitle_procesador}" />
+                    <p:outputLabel value="IP" for="ipAdress" />
+                    <p:inputText id="ipAdress" size="60" value="#{servidorController.selected.ipAdress}" title="#{bundle.CreateServidorTitle_ipAdress}" />
+                    <p:outputLabel value="Memoria" for="memoria" />
+                    <p:inputText id="memoria" size="60" value="#{servidorController.selected.memoria}" title="#{bundle.CreateServidorTitle_memoria}" />
+                    <p:outputLabel value="Virtual" for="virtual" />
+			        <p:selectOneMenu id="virtual" value="#{servidorController.selected.virtual}">
+			        	<f:selectItem itemLabel="---" itemValue="-" />
+			            <f:selectItem itemLabel="Si" itemValue="S" />
+			            <f:selectItem itemLabel="No" itemValue="N" />
+			        </p:selectOneMenu>                    
+                    <p:outputLabel value="Ubicación Física" for="ubicacionFisica" />
+                    <p:inputText id="ubicacionFisica" size="60" value="#{servidorController.selected.ubicacionFisica}" title="#{bundle.CreateServidorTitle_ubicacionFisica}" />
+                    <p:outputLabel value="Comentario Interno" for="comentarioInterno" />
+                    <p:inputTextarea  id="comentarioInterno" rows="3" cols="70" value="#{servidorController.selected.comentarioInterno}"  />                    
+                    <p:outputLabel value="ID Servidor Físico" for="servidorFisicoId" />
+                    <p:selectOneMenu id="servidorFisicoId" value="#{servidorController.selected.servidorFisicoId}">
+                        <f:selectItems value="#{servidorController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>  
+                    <p:outputLabel value="Ambiente" for="idAmbiente" />
+                    <p:selectOneMenu id="idAmbiente" value="#{servidorController.selected.idAmbiente}">
+                        <f:selectItems value="#{ambienteController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>                      
+
+                    <f:facet name="footer">
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{servidorController.create}" value="Guardar">
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{servidorController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>	                    
+                </p:panelGrid>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

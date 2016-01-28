@@ -1,0 +1,258 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+
+	xmlns:h="http://java.sun.com/jsf/html"
+
+	xmlns:f="http://java.sun.com/jsf/core"
+
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+
+
+
+</h:head>
+
+<h:body>
+
+    <ui:composition template="/masterLayout.xhtml">
+
+		<ui:define name="metadata">
+
+			<f:view>
+
+				<f:metadata>
+
+					<f:event listener="#{backLogin.verificarAccesoMonitor}"
+
+						type="preRenderView"></f:event>
+
+				</f:metadata>
+
+			</f:view>
+
+		</ui:define>
+
+        <ui:define name="title">
+
+            <div align="center">
+
+            	<h:outputText value="Catálogo de Arquitectura Yanbal"></h:outputText>
+
+            </div>
+
+            <div align="left">
+
+            	<h:outputText value="Vistas :"></h:outputText>
+
+            </div>
+
+        </ui:define>
+
+		<ui:define name="body">
+
+			<h:form id="form">	
+
+			    <p:growl id="msgs" showDetail="true" />
+
+ 
+
+				    <p:accordionPanel>
+
+				    		<p:tab title="Acerca de (empezar aquí)">
+
+								<!-- Solucion -->			        	
+
+								<p> En este aplicativo podrá encontrar información sobre la Arquitectura IT Yanbal, vista desde diferentes perspectivas. </p>
+
+								
+
+								<p>Se recomienda  revizar el vocabulario <a class="linkMenu" href="/faces/view/diccionarioDatos/diccionario.xhtml">
+
+								(diccionario de datos)</a>, utilizado en el presente antes de empezar.</p> 
+								
+								<p>La información encontrada aquí es mantenida por el Área de Aquitectura en base a la colaboración del área IT de Yanbal y está en curso de ser completada. 
+								En caso de actualizaciones favor comunicarse con : Jorge.Cabrera@yanbal-int.com o Luis.Watanabe@yanbal-int.com.</p>
+
+
+
+
+
+	        				</p:tab>
+
+	        				
+
+				        	<p:tab title="Vista de Negocio (Soluciones, Procesos, Subprocesos, Aplicativos)">
+
+								<!-- Procesos y Negocio -->								
+
+								<!-- Solucion -->			        	
+
+								<li> <a class="linkMenu" href="/faces/view/solucion/List.xhtml"><b>Soluciones</b> -  #{backLogin.obtenerSignificado("SOLUCION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacion/List.xhtml"><b>Aplicaciones</b> - #{backLogin.obtenerSignificado("APLICACION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionXSolucion/List.xhtml"><b>Aplicaciones de una solución</b> - #{backLogin.obtenerSignificado("APLICACION_X_SOLUCION")} </a></li>
+
+								<li><a class="linkMenu" href="/faces/view/proceso/List.xhtml"><b>Procesos</b> - #{backLogin.obtenerSignificado("PROCESO")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/subProcesoNegocio/List.xhtml"><b>Subprocesos de negocio</b> - #{backLogin.obtenerSignificado("SUB_PROCESO_NEGOCIO")}</a></li>	
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionXSubProcesoNegocio/List.xhtml"><b>Aplicaciones subproceso de negocio</b> - #{backLogin.obtenerSignificado("APLICACION_X_SUB_PROCESO_NEGOCIO")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/plataformaCliente/List.xhtml"><b>Plataformas clientes</b> - #{backLogin.obtenerSignificado("PLATAFORMA_CLIENTE")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/certificacion/List.xhtml"><b>Clientes certificados</b>- #{backLogin.obtenerSignificado("CERTIFICACION")}</a></li>
+
+							</p:tab>
+
+
+
+
+
+				        	<p:tab title=" Vista de Infraestructura (Servidores, Software Base, Ambientes)">
+
+				        	
+
+				        		<li><a class="linkMenu" href="/faces/view/servidor/List.xhtml"><b>Servidores</b> - #{backLogin.obtenerSignificado("SERVIDOR")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/softwareBase/List.xhtml"><b>Software (SW) Base</b> - #{backLogin.obtenerSignificado("SOFTWARE_BASE")} </a></li>
+
+								<li><a class="linkMenu" href="/faces/view/softwareBaseInstancia/List.xhtml"><b>Instancia SW Base</b> - #{backLogin.obtenerSignificado("INSTANCIA_SOFTWARE_BASE")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/SoftwareBaseInstanciaXServidor/List.xhtml"><b>Instancia SW Base por servidor</b> #{backLogin.obtenerSignificado("INSTANCIA_SOFTWARE_BASE_SERVIDOR")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/ambiente/List.xhtml"><b>Ambientes</b> - #{backLogin.obtenerSignificado("AMBIENTE")}</a></li>							
+
+							</p:tab>
+
+
+
+				        	<p:tab title="Vista de Datos (Bases de Datos, Tablas, Entidades)">
+
+								<!-- Base de Datos -->
+
+								<li><a class="linkMenu" href="/faces/view/baseDatos/List.xhtml"><b>Bases de datos</b> - #{backLogin.obtenerSignificado("BASE_DATOS")}</a></li>								
+
+								<li><a class="linkMenu" href="/faces/view/entidad/List.xhtml"><b>Entidades</b> - #{backLogin.obtenerSignificado("ENTIDAD")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/atributoXEntidad/List.xhtml"><b>Atributos entidad datos</b>- #{backLogin.obtenerSignificado("ATRIBUTO")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/baseDatosServidor/List.xhtml"><b>Emplazamiento base de datos</b> - #{backLogin.obtenerSignificado("BASE_DATOS_SERVIDOR")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/funcion/List.xhtml"><b>Funciones de base de datos</b> - #{backLogin.obtenerSignificado("FUNCION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/storeProcedure/List.xhtml"><b>Procedimientos almacenados</b> - #{backLogin.obtenerSignificado("STORE_PROCEDURE")}</a></li>
+
+							</p:tab>
+
+
+
+							<p:tab title="Vista SOA - Servicios e Interfaces">
+
+								<!-- Servicios -->								
+
+								<li><a class="linkMenu" href="/faces/view/servicio/List.xhtml"><b>Servicios</b> - #{backLogin.obtenerSignificado("SERVICIO")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/servicioXServicio/List.xhtml"><b>Dependencia de servicios</b>- #{backLogin.obtenerSignificado("DEPENDENCIA_SERVICIO")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/interfaceBatch/List.xhtml"><b>Interfaces Batch</b>- #{backLogin.obtenerSignificado("INTERFACE_BATCH")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/softwareBaseInstanciaXServicio/List.xhtml"><b>Servicio SW Base</b>- #{backLogin.obtenerSignificado("SOFTWARE_BASE_INSTANCIA_X_SERVICIO")}</a></li>
+
+							</p:tab>
+
+								
+
+
+
+				        	<p:tab title="Vista de Aplicacion (Características y Relaciones)">
+
+								<!-- Vistas de una Aplicacion  -->
+
+								<li><a class="linkMenu" href="/faces/view/aplicacion/List.xhtml"><b>Aplicaciones</b> - #{backLogin.obtenerSignificado("APLICACION")}</a></li>								
+
+								<li><a class="linkMenu" href="/faces/view/PaisXAplicacion/List.xhtml"><b>Países aplicación</b> - #{backLogin.obtenerSignificado("PAIS_X_APLICACION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionXBaseDatos/List.xhtml"><b>Base de Datos aplicación</b>- #{backLogin.obtenerSignificado("APLICACION_X_BASE_DATOS")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionInterfaceConsume/List.xhtml"><b>Interfaces aplicación(Consume)</b>- #{backLogin.obtenerSignificado("INTERFACE_CONSUME")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionInterfaceExpone/List.xhtml"><b>Interface aplicación(Expone)</b> - #{backLogin.obtenerSignificado("INTERFACE_EXPONE")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/aplicacionXCaracteristica/List.xhtml"><b>Características aplicación</b>- #{backLogin.obtenerSignificado("APLICACION_X_CARACTERISTICA")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/FrameworkXAplicacion/List.xhtml"><b>Frameworks Aplicación</b>- #{backLogin.obtenerSignificado("FRAMEWORK_APLICACION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/SoftwareBaseInstanciaXAplicacion/List.xhtml"><b>Aplicación instancia</b> SW Base- #{backLogin.obtenerSignificado("SOFTWARE_BASE_INSTANCIA_X_APLICACION")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/AplicacionXArchivoDesplegable/List.xhtml"><b>Archivo desplegable aplicación</b>- #{backLogin.obtenerSignificado("APLICACION_X_ARCHIVO_DESPLEGABLE")}</a></li>
+
+								<li><a class="linkMenu" href="/faces/view/excepcion/List.xhtml"><b>Excepciones de arquitectura aplicación</b>- #{backLogin.obtenerSignificado("EXCEPCION")} </a></li>							
+
+							</p:tab>
+
+							<!--  
+
+				        <p:tab title="Diccionario - (Significado de las entidades y atributos del Catalogo)">
+
+				            	<p:column><a class="linkMenu" href="/faces/view/diccionarioDatos/diccionario.xhtml">Diccionario de Entidades y Atributos del Catalogo</a></p:column>
+
+				        </p:tab>		        
+
+							
+
+				        <p:tab title="Reportes">
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/Aplicacion_X_Solucion.xhtml">Aplicación por Solución</a></li>
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/AplicacionDetalle.xhtml">Aplicación Detalle</a></li>
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/Reporte_AplicacionXBaseDato.xhtml">Aplicación por Base de Datos</a></li>
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/Reporte_BaseDatoXAplicacion.xhtml">Base de Datos por Aplicación</a></li>
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/Reporte_ServidorSWBaseAplicacion.xhtml">Servidor SW Base Aplicación</a></li>
+
+				            	<li><a class="linkMenu" href="/faces/view/reporte/AplicacionesSolucion.xhtml">Aplicacines Soluciones</a></li>
+
+				        </p:tab>
+
+				        -->
+
+				        <p:tab title="Administración" rendered="#{backLogin.usuario.perfil == 'Arquitectura'}" >
+
+				        	<li><a class="linkMenu" href="/faces/view/usuario/List.xhtml"><b>Usuarios (catálogo)</b></a></li>
+
+				        	<li><a class="linkMenu" href="/faces/view/pais/List.xhtml"><b>Países</b>- #{backLogin.obtenerSignificado("PAIS")}</a></li>
+
+				        	<li><a class="linkMenu" href="/faces/view/archivoDesplegable/List.xhtml"><b>Archivos desplegables</b> - #{backLogin.obtenerSignificado("ARCHIVO_DESPLEGABLE")}</a></li>
+
+							<li><a class="linkMenu" href="/faces/view/estadoAplicacion/List.xhtml"><b>Estados de la aplicación</b> - #{backLogin.obtenerSignificado("ESTADO_APLICACION")}</a></li>
+
+							<li><a class="linkMenu" href="/faces/view/framework/List.xhtml"><b>Frameworks</b> - #{backLogin.obtenerSignificado("FRAMEWORK")}</a></li>
+
+							<li><a class="linkMenu" href="/faces/view/caractetisticaAplicacion/List.xhtml"><b>Características de las aplicaciones</b> - #{backLogin.obtenerSignificado("CARACTERISTICA_APLICACION")} </a></li>
+
+				        </p:tab>
+
+				    </p:accordionPanel>					
+
+			</h:form>
+
+
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+
+</html>
+
+ 

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/masterLayout.xhtml">
+		<ui:define name="metadata">
+			<f:view>
+				<f:metadata>
+					<f:event listener="#{backLogin.verificarAccesoMonitor}"
+						type="preRenderView"></f:event>
+				</f:metadata>
+			</f:view>
+		</ui:define>
+	<ui:define name="title">
+		<h:outputText value="Lista de Usuarios"></h:outputText>
+	</ui:define>
+	<ui:define name="body">
+	                    <p:accordionPanel activeIndex="-" >
+				    		<p:tab title="Definición">
+				    		 	#{backLogin.obtenerDescripcionLarga("USUARIO")}
+				    	    </p:tab>
+				   </p:accordionPanel>		
+		<h:form id="form_usuario">
+			<p:growl id="growl" autoUpdate="true" showDetail="true" />
+			<h:panelGroup id="messagePanel" layout="block">
+				<h:messages errorStyle="color: red" infoStyle="color: green"
+					layout="table" />
+			</h:panelGroup>
+			<p:panel>
+				<p:dataTable id="mydata_usuario" value="#{usuarioController.items}"
+					var="item" rows="10" paginator="true" rowIndexVar="rowIndex"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="10,25,50" widgetVar="UsuarioTable"
+					filteredValue="#{usuarioController.filteredItems}">
+					<f:facet name="header">
+						<p:outputPanel>
+							<h:outputText value="Buscar Palabra : " />
+							<p:inputText id="globalFilter"
+								onkeyup="PF('UsuarioTable').filter()" style="width:150px"
+								placeholder="Enter keyword" />
+						</p:outputPanel>
+					</f:facet>
+					<p:column headerText="#" style="width:4%;"> #{rowIndex+1} </p:column>
+					<p:column headerText="Nombre" filterBy="#{item.nombres}"
+						style="width:25%;">#{item.nombres}</p:column>
+					<p:column headerText="Apellidos" filterBy="#{item.apellidos}"
+						style="width:25%;">#{item.apellidos}</p:column>
+					<p:column headerText="Código" filterBy="#{item.codigo}"
+						style="width:5%;">#{item.codigo}</p:column>
+					<p:column headerText="UserName" style="width:9%;">#{item.username}</p:column>
+					<p:column headerText="Password" style="width:9%;">#{item.password}</p:column>
+					<p:column headerText="Perfil" filterBy="#{item.perfil}"
+						style="width:10%;">#{item.perfil}</p:column>
+					<p:column rendered="#{backLogin.usuario.perfil == 'Arquitectura'}"
+						headerText="Editar" style="width:4%;">
+						<h:commandLink action="#{usuarioController.prepareEditCust(item)}">
+							<h:graphicImage value="/resources/images/editar.png" alt="Editar"
+								width="20" height="20" />
+						</h:commandLink>
+					</p:column>
+					<p:column rendered="#{backLogin.usuario.perfil == 'Arquitectura'}"
+						headerText="Eliminar" style="width:5%;">
+						<h:commandLink action="#{usuarioController.destroyCust(item)}"
+							onclick="if(!confirm('¿Esta seguro que desea eliminar?')) return false;">
+							<h:graphicImage value="/resources/images/eliminar.gif"
+								alt="Eliminar" width="20" height="20" />
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+					</p:column>
+
+				</p:dataTable>
+
+				<f:facet name="footer">
+					<h:commandLink
+						action="#{usuarioController.prepareCreate}"
+						disabled="#{backLogin.usuario.perfil != 'Arquitectura'}"
+							style="font-style: italic; font-size:14px; font-weight: bold; color: red;">
+						<h:outputText value="Registrar" />
+					</h:commandLink>
+				</f:facet>
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+
+</html>

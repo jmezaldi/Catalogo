@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+   	<ui:composition template="/template.xhtml">
+	<ui:define name="metadata">
+		<f:view>
+			<f:metadata>
+				<f:event listener="#{backLogin.verificarAccesoMonitor}" type="preRenderView">
+				</f:event>
+			</f:metadata>
+		</f:view>
+	</ui:define>  
+ 
+        <ui:define name="title">
+            <h:outputText value="Agregar Aplicación Interface Consume"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+				<p:growl autoUpdate="true" showDetail="true" />
+				<p:panelGrid columns="2">
+					<f:facet name="header">FORMULARIO</f:facet>
+                    <p:outputLabel value="Nombre Componente" for="nombreComponente" />
+                    <p:inputText id="nombreComponente" size="60" value="#{aplicacionInterfaceConsumeController.selected.nombreComponente}" title="#{bundle.CreateAplicacionInterfaceConsumeTitle_nombreComponente}" />
+                    <p:outputLabel value="Servicio Consume" for="idServicioConsume" />
+                    <p:selectOneMenu id="idServicioConsume" value="#{aplicacionInterfaceConsumeController.selected.idServicioConsume}" title="#{bundle.CreateAplicacionInterfaceConsumeTitle_idServicioConsume}" required="true" requiredMessage="#{bundle.CreateAplicacionInterfaceConsumeRequiredMessage_idServicioConsume}"> 
+                        <f:selectItems value="#{servicioController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Aplicación" for="idAplicacion" />
+                    <p:selectOneMenu id="idAplicacion" value="#{aplicacionInterfaceConsumeController.selected.idAplicacion}" title="#{bundle.CreateAplicacionInterfaceConsumeTitle_idAplicacion}" required="true" requiredMessage="#{bundle.CreateAplicacionInterfaceConsumeRequiredMessage_idAplicacion}"> 
+                        <f:selectItems value="#{aplicacionController.itemsAvailableSelectOne}" var="entry"
+        				itemValue="#{entry}" itemLabel="#{entry.label}" />                        
+                    </p:selectOneMenu>                    
+					<f:facet name="footer">
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{aplicacionInterfaceConsumeController.create}" value="Guardar">
+							<f:param name="email_account" value="#{backLogin.usuario.correo}" />
+						</h:commandLink>
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:outputText value="&#160;" /><h:outputText value="&#160;" />
+						<h:commandLink action="#{aplicacionInterfaceConsumeController.prepareList}" value="Regresar Lista" immediate="true"/>
+					</f:facet>	                    
+                </p:panelGrid>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>
